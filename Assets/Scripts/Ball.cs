@@ -50,17 +50,22 @@ public class Ball : MonoBehaviour
           if(boardPosition < 0) {
            hitarea *= -1; 
           }
-          Debug.Log(hitarea);
+          float magnitude = m_Rigidbody.velocity.magnitude;
           if(hitarea <= 0.6 && hitarea >= 0.3) {
-            m_Rigidbody.velocity = new Vector2(6f, m_Rigidbody.velocity.y);
+            Vector2 normalizedVector = new Vector2(6f, 2f).normalized;
+            m_Rigidbody.velocity = normalizedVector * magnitude;
           }else if (hitarea < 3 && hitarea > 0) {
-            m_Rigidbody.velocity = new Vector2(3f, m_Rigidbody.velocity.y);
+            Vector2 normalizedVector = new Vector2(3f, 3f).normalized;
+            m_Rigidbody.velocity = normalizedVector * magnitude;
           }else if(hitarea == 0) {
-            m_Rigidbody.velocity = new Vector2(0f, m_Rigidbody.velocity.y);
+            Vector2 normalizedVector = new Vector2(0f, m_Rigidbody.velocity.y).normalized;
+            m_Rigidbody.velocity = normalizedVector * magnitude;
           }else if (hitarea < 0 && hitarea >= -0.3) {
-            m_Rigidbody.velocity = new Vector2(-3f, m_Rigidbody.velocity.y);
+            Vector2 normalizedVector = new Vector2(-3f, 3f).normalized;
+            m_Rigidbody.velocity = normalizedVector * magnitude;
           }else {
-            m_Rigidbody.velocity = new Vector2(-6f, m_Rigidbody.velocity.y);
+            Vector2 normalizedVector = new Vector2(-6f, 2f).normalized;
+            m_Rigidbody.velocity = normalizedVector * magnitude;
           }
         }
       }
